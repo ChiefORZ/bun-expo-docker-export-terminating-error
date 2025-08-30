@@ -1,0 +1,15 @@
+# Dockerfile for Expo Router API routes (third-party hosting)
+# See: https://docs.expo.dev/router/reference/api-routes/#hosting-on-third-party-services
+
+# Use official Bun image (includes Node.js-compatible runtime)
+FROM oven/bun:1.2-alpine
+
+# Set working directory
+WORKDIR /app
+
+COPY . .
+# Skip lefthook prepare and other dev-only scripts during install
+RUN bun install --no-progress
+
+# Build the server if needed (uncomment if you have a build step)
+RUN bun run build:server
